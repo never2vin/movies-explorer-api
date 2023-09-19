@@ -13,8 +13,10 @@ const validateMessages = {
   'string.max': 'Максимальная длина поля {#label} - {#limit}',
   'string.email': 'Некорректный {#label}',
   'string.uriCustomScheme': 'Поле {#label} содержит некорректный URL-адрес',
-  'string.required': 'Поле {#label} должно быть заполнено',
-  'number.required': 'Поле {#label} должно быть заполнено',
+  // 'any.required': 'Поле {#label} должно быть заполнено',
+  'string.empty': 'Поле {#label} должно быть заполнено',
+  'number.empty': 'Поле {#label} должно быть заполнено',
+  'number.base': 'Поле {#label} должно быть числом',
 };
 
 const errorMessages = {

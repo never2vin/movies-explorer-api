@@ -6,6 +6,14 @@ const schemaMessages = {
   notURL: 'Поле `{PATH}` содержит некорректный URL-адрес',
 };
 
+const validateMessages = {
+  'string.min': 'Минимальная длина поля {#label} - {#limit}',
+  'string.max': 'Максимальная длина поля {#label} - {#limit}',
+  'string.email': 'Некорректный {#label}',
+  'string.required': 'Поле {#label} должно быть заполнено',
+};
+
 module.exports = {
   schemaMessages,
+  validateMessages,
 };

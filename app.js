@@ -4,6 +4,11 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 
+const { errors } = require('celebrate');
+const errorHandler = require('./middlewares/error-handler');
+
+const router = require('./routes');
+
 const {
   PORT,
   MONGODB_URL,
@@ -26,6 +31,11 @@ app.use(
 
 app.use(helmet());
 app.use(express.json());
+
+app.use(router);
+
+router.use(errors());
+router.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

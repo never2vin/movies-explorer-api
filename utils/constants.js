@@ -7,10 +7,14 @@ const schemaMessages = {
 };
 
 const validateMessages = {
+  'string.hex': 'Некорректный id',
+  'string.length': 'Некорректный id',
   'string.min': 'Минимальная длина поля {#label} - {#limit}',
   'string.max': 'Максимальная длина поля {#label} - {#limit}',
   'string.email': 'Некорректный {#label}',
+  'string.uriCustomScheme': 'Поле {#label} содержит некорректный URL-адрес',
   'string.required': 'Поле {#label} должно быть заполнено',
+  'number.required': 'Поле {#label} должно быть заполнено',
 };
 
 module.exports = {

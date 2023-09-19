@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const cors = require('cors');
 
 const { errors } = require('celebrate');
+const rateLimit = require('./middlewares/rate-limit');
 const errorHandler = require('./middlewares/error-handler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -31,6 +32,7 @@ app.use(
 );
 
 app.use(requestLogger);
+app.use(rateLimit);
 app.use(helmet());
 app.use(express.json());
 

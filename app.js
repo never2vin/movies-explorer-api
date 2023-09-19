@@ -6,6 +6,7 @@ const cors = require('cors');
 
 const { errors } = require('celebrate');
 const errorHandler = require('./middlewares/error-handler');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const router = require('./routes');
 
@@ -29,13 +30,15 @@ app.use(
   }),
 );
 
+app.use(requestLogger);
 app.use(helmet());
 app.use(express.json());
 
 app.use(router);
 
-router.use(errors());
-router.use(errorHandler);
+app.use(errorLogger);
+app.use(errors());
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);

@@ -16,7 +16,7 @@ router.use('/users', usersRouter);
 router.use('/movies', moviesRouter);
 
 router.use('*', (req, res, next) => {
-  next(HttpError.NotFoundError('Ресурс не найден. Проверьте URL и метод запроса'));
+  next(HttpError.NotFoundError());
 });
 
 module.exports = router;

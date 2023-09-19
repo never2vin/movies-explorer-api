@@ -6,6 +6,8 @@ const {
   HTTP_STATUS_CONFLICT,
 } = require('http2').constants;
 
+const messages = require('../utils/constants').errorMessages;
+
 class HttpError extends Error {
   constructor(status, message) {
     super(message);
@@ -13,24 +15,24 @@ class HttpError extends Error {
     this.message = message;
   }
 
-  static BadRequestError(message) {
-    return new HttpError(HTTP_STATUS_BAD_REQUEST, message);
+  static BadRequestError(route) {
+    return new HttpError(HTTP_STATUS_BAD_REQUEST, messages[route][HTTP_STATUS_BAD_REQUEST]);
   }
 
-  static UnauthorizedError(message = 'Email или пароль неверный') {
-    return new HttpError(HTTP_STATUS_UNAUTHORIZED, message);
+  static UnauthorizedError(route = '*') {
+    return new HttpError(HTTP_STATUS_UNAUTHORIZED, messages[route][HTTP_STATUS_UNAUTHORIZED]);
   }
 
-  static ForbiddenError(message) {
-    return new HttpError(HTTP_STATUS_FORBIDDEN, message);
+  static ForbiddenError(route) {
+    return new HttpError(HTTP_STATUS_FORBIDDEN, messages[route][HTTP_STATUS_FORBIDDEN]);
   }
 
-  static NotFoundError(message) {
-    return new HttpError(HTTP_STATUS_NOT_FOUND, message);
+  static NotFoundError(route = '*') {
+    return new HttpError(HTTP_STATUS_NOT_FOUND, messages[route][HTTP_STATUS_NOT_FOUND]);
   }
 
-  static ConflictError(message) {
-    return new HttpError(HTTP_STATUS_CONFLICT, message);
+  static ConflictError(route) {
+    return new HttpError(HTTP_STATUS_CONFLICT, messages[route][HTTP_STATUS_CONFLICT]);
   }
 }
 

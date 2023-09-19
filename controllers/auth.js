@@ -23,7 +23,7 @@ const register = (req, res, next) => {
     }))
     .catch((error) => {
       if (error.code === MONGO_DUPLICATE_KEY_ERROR) {
-        next(HttpError.ConflictError('Такой пользователь уже есть'));
+        next(HttpError.ConflictError(req.originalUrl));
         return;
       }
 
@@ -35,11 +35,11 @@ const login = (req, res, next) => {
   const { email, password } = req.body;
 
   User.findOne({ email }).select('+password')
-    .orFail(HttpError.UnauthorizedError())
+    .orFail(HttpError.UnauthorizedError(req.originalUrl))
     .then((user) => Promise.all([user, bcrypt.compare(password, user.password)]))
     .then(([user, isEqual]) => {
       if (!isEqual) {
-        throw HttpError.UnauthorizedError();
+        throw HttpError.UnauthorizedError(req.originalUrl);
       }
 
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });

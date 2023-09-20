@@ -10,6 +10,13 @@ const validateUser = celebrate({
   }),
 }, { abortEarly: false });
 
+const validateUserAuth = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().required().email().messages(messages),
+    password: Joi.string().required().messages(messages),
+  }),
+}, { abortEarly: false });
+
 const validateUserUpdate = celebrate({
   body: Joi.object().keys({
     email: Joi.string().required().email().messages(messages),
@@ -42,6 +49,7 @@ const validateMovieId = celebrate({
 
 module.exports = {
   validateUser,
+  validateUserAuth,
   validateUserUpdate,
   validateMovie,
   validateMovieId,

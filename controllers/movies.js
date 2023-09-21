@@ -4,7 +4,7 @@ const Movie = require('../models/movie');
 
 const HttpError = require('../error/http-error');
 
-const getMovies = (req, res, next) => Movie.find({})
+const getMovies = (req, res, next) => Movie.find({ owner: req.user._id })
   .then((movies) => res.status(HTTP_STATUS_OK).send(movies))
   .catch(next);
 

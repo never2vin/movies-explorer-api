@@ -1,15 +1,15 @@
-const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('http2').constants;
-
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const { HTTP_STATUS_OK, HTTP_STATUS_CREATED } = require('http2').constants;
+const { MONGO_DUPLICATE_KEY_ERROR } = require('../utils/constants');
 const { JWT_SECRET } = require('../config');
-const User = require('../models/user');
+
+const SALT_ROUNDS = 10;
 
 const HttpError = require('../error/http-error');
 
-const MONGO_DUPLICATE_KEY_ERROR = 11000;
-const SALT_ROUNDS = 10;
+const User = require('../models/user');
 
 const register = (req, res, next) => {
   bcrypt.hash(req.body.password, SALT_ROUNDS)
@@ -23,7 +23,7 @@ const register = (req, res, next) => {
     }))
     .catch((error) => {
       if (error.code === MONGO_DUPLICATE_KEY_ERROR) {
-        next(HttpError.ConflictError(req.originalUrl));
+        next(HttpError.ConflictError());
         return;
       }
 

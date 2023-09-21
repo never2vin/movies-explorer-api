@@ -1,3 +1,5 @@
+const MONGO_DUPLICATE_KEY_ERROR = 11000;
+
 const schemaMessages = {
   empty: 'Поле `{PATH}` должно быть заполнено',
   min: 'Минимальная длина поля `{PATH}` - 2',
@@ -24,8 +26,6 @@ const errorMessages = {
     401: 'Пользователь не авторизован',
     404: 'Ресурс не найден. Проверьте URL и метод запроса',
     500: 'На сервере произошла ошибка',
-  },
-  '/signup': {
     409: 'Такой пользователь уже есть',
   },
   '/signin': {
@@ -41,6 +41,7 @@ const errorMessages = {
 };
 
 module.exports = {
+  MONGO_DUPLICATE_KEY_ERROR,
   schemaMessages,
   validateMessages,
   errorMessages,

@@ -31,7 +31,7 @@ class HttpError extends Error {
     return new HttpError(HTTP_STATUS_NOT_FOUND, messages[route][HTTP_STATUS_NOT_FOUND]);
   }
 
-  static ConflictError(route) {
+  static ConflictError(route = '*') {
     return new HttpError(HTTP_STATUS_CONFLICT, messages[route][HTTP_STATUS_CONFLICT]);
   }
 }
